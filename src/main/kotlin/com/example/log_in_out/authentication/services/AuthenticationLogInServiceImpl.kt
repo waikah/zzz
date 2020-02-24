@@ -9,7 +9,7 @@ import java.lang.Exception
 import java.util.*
 
 @Service
-class AuthenticationServiceImpl: AuthenticationService {
+class AuthenticationLogInServiceImpl: AuthenticationLogInService {
     @Autowired
     lateinit var userRepo: UserRepository
 

@@ -6,7 +6,7 @@ import javax.persistence.*
 @Table(name = "token")
 data class Token(
         @Id
-        @Column(name = "authenticationToken", nullable = false, unique = true, updatable = false)
+        @Column(name = "authentication_token", nullable = false, unique = true, updatable = false)
         var authenticationToken: String,
 
         @Column(name = "user_id", nullable = false, updatable = false)

@@ -2,9 +2,8 @@ package com.example.log_in_out.authentication
 
 import com.example.log_in_out.authentication.dao.TokenStoringPostRequest
 import com.example.log_in_out.authentication.dao.UserLoginPostRequest
-import com.example.log_in_out.authentication.services.AuthenticationService
-import com.example.log_in_out.authentication.services.AuthenticationService2
-import com.example.log_in_out.authentication.services.AuthenticationServiceImpl
+import com.example.log_in_out.authentication.services.AuthenticationLogInService
+import com.example.log_in_out.authentication.services.AuthenticationLogOutService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.PostMapping
@@ -16,9 +15,9 @@ import org.springframework.web.bind.annotation.RestController
 @RequestMapping("/api/v1/auth")
 class AuthenticationController {
     @Autowired
-    lateinit var authenticationService: AuthenticationService
+    lateinit var authenticationService: AuthenticationLogInService
     @Autowired
-    lateinit var authenticationService2: AuthenticationService2
+    lateinit var authenticationLogOutService: AuthenticationLogOutService
 
     @PostMapping("/login")
     fun signIn(@RequestBody userDetail: UserLoginPostRequest): ResponseEntity<String> {
@@ -27,8 +26,8 @@ class AuthenticationController {
     }
 
     @PostMapping("/logout")
-    fun signOutrequest(@RequestBody tokenDetail: TokenStoringPostRequest): ResponseEntity<String> {
-        val token1 = authenticationService2.signOut(tokenDetail.authenticationToken, tokenDetail.userId)
-        return ResponseEntity.ok(token1)
+    fun signOut(@RequestBody tokenDetail: TokenStoringPostRequest): ResponseEntity<String> {
+        val signOutMsg = authenticationLogOutService.signOutWithToken(tokenDetail.authenticationToken)
+        return ResponseEntity.ok(signOutMsg)
     }
 }
