@@ -6,11 +6,11 @@ import org.springframework.web.bind.annotation.RestController
 
 @RestController
 @SpringBootApplication
-class LogInOutApplication{
+class LoginAPIApplication {
 	companion object {
 		@JvmStatic
 		fun main(args: Array<String>) {
-			SpringApplication.run(LogInOutApplication::class.java, *args)
+			SpringApplication.run(LoginAPIApplication::class.java, *args)
 		}
 	}
 }

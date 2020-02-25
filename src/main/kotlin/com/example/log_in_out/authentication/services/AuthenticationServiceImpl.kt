@@ -9,7 +9,7 @@ import java.lang.Exception
 import java.util.*
 
 @Service
-class AuthenticationLogInServiceImpl: AuthenticationLogInService {
+class AuthenticationServiceImpl : AuthenticationService {
     @Autowired
     lateinit var userRepo: UserRepository
 
@@ -31,6 +31,20 @@ class AuthenticationLogInServiceImpl: AuthenticationLogInService {
                     }
                 }.orElseThrow {
                     return@orElseThrow Exception("Wrong Username")
+                }
+    }
+
+    override fun signOutWithToken(authenticationToken: String): String {
+        return tokenRepo.findByAuthenticationToken(authenticationToken)
+                .map {
+                    //I should remove the token
+                    val token = Token(it.authenticationToken, it.userId)
+                    tokenRepo.delete(token)
+
+                    return@map "Logout Successfully"
+                }
+                .orElseThrow {
+                    return@orElseThrow Exception("Invalid Token")
                 }
     }
 }
