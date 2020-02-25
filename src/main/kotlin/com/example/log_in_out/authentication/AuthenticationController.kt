@@ -4,8 +4,14 @@ import com.example.log_in_out.authentication.dao.TokenStoringPostRequest
 import com.example.log_in_out.authentication.dao.UserLoginPostRequest
 import com.example.log_in_out.authentication.services.AuthenticationService
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.http.HttpHeaders
+import org.springframework.http.HttpStatus
+import org.springframework.http.MediaType
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
+import org.springframework.web.client.HttpClientErrorException
+import org.springframework.web.servlet.function.RequestPredicates.contentType
+import java.io.IOException
 
 
 @RestController
@@ -18,28 +24,24 @@ class AuthenticationController {
     @PostMapping("/login")
     fun signIn(@RequestBody userDetail: UserLoginPostRequest): ResponseEntity<String> {
         val token: String
-        token = try {
-            authenticationService.signInWithUsernameAndPassword(userDetail.username, userDetail.password)
-            //val httpHeader = HttpHeaders()
-
-            //httpHeader.addHeader("Access-Control-Expose-Headers", "Authorization");
-            //httpHeader.add("Authorization", token)
+        return try {
+            token = authenticationService.signInWithUsernameAndPassword(userDetail.username, userDetail.password)
+            ResponseEntity.ok().contentType(MediaType.APPLICATION_JSON).body(token)
         } catch (e: Exception) {
-            e.message.toString()
+            ResponseEntity.badRequest().contentType(MediaType.APPLICATION_JSON).body(e.message.toString())
         }
-
-        return ResponseEntity.ok(token)
-        //return ResponseEntity.ok().header("Authorization", token).build()
+        //return ResponseEntity.ok(token)
     }
 
     @PostMapping("/logout")
     fun signOut(@RequestBody tokenDetail: TokenStoringPostRequest): ResponseEntity<String> {
         val signOutMsg: String
-        signOutMsg = try {
-            authenticationService.signOutWithToken(tokenDetail.authenticationToken)
+        return try {
+            signOutMsg = authenticationService.signOutWithToken(tokenDetail.authenticationToken)
+
+            ResponseEntity.ok().contentType(MediaType.APPLICATION_JSON).body(signOutMsg)
         } catch (e: Exception) {
-            e.message.toString()
+            ResponseEntity.badRequest().contentType(MediaType.APPLICATION_JSON).body(e.message.toString())
         }
-        return ResponseEntity.ok(signOutMsg)
     }
 }

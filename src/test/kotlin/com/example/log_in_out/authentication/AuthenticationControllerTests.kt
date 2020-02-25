@@ -24,10 +24,9 @@ class AuthenticationControllerTests {
 
     @Test
     fun `should return a valid token for user abc with password 123`() {
-//        `when`(authenticationService.signInWithUsernameAndPassword("abc", "123"))
-//                .thenReturn("qwerty")
-        `when`(authenticationService.signInWithUsernameAndPassword("abc", "1123"))
-                .thenReturn("Wrong Password")
+        `when`(authenticationService.signInWithUsernameAndPassword("abc", "123"))
+                .thenReturn("qwerty")
+        // `when`(authenticationService.signInWithUsernameAndPassword("abc", "456")).thenThrow()
 
         mvc.perform(post("/api/v1/auth/login")
                 .contentType(MediaType.APPLICATION_JSON)
@@ -38,7 +37,25 @@ class AuthenticationControllerTests {
                     }
                 """.trimIndent()))
                 .andExpect(status().isOk)
-                .andExpect(content().string("Wrong Password"))
+                .andExpect(content().string("qwerty"))
+    }
+
+    @Test
+    fun `should return error message`() {
+        `when`(authenticationService.signInWithUsernameAndPassword("abc", "456"))
+                .thenReturn("wrong password").thenThrow(IllegalStateException::class.java)
+
+
+        mvc.perform(post("/api/v1/auth/login")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("""
+                    {
+                        "username": "abc",
+                        "password": "123"
+                    }
+                """.trimIndent()))
+                .andExpect(status().isBadRequest)
+                .andExpect(content().string("wrong password"))
     }
 
 
@@ -51,11 +68,11 @@ class AuthenticationControllerTests {
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("""
                     {
-                        "authenticationToken": "132"
+                        "authenticationToken": "qwerty"
                     }
                 """.trimIndent()))
                 .andExpect(status().isOk)
-                .andExpect(content().string("Token Invalid"))
+                .andExpect(content().string("Logout Successfully"))
 
     }
 }
