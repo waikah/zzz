@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RestController
 
 @RestController
 @SpringBootApplication
-class LoginAPIApplication {
+open class LoginAPIApplication {
 	companion object {
 		@JvmStatic
 		fun main(args: Array<String>) {

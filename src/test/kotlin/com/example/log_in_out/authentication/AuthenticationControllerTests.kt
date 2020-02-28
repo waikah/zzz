@@ -10,8 +10,10 @@ import org.springframework.boot.test.mock.mockito.MockBean
 import org.springframework.http.MediaType
 import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post
+import org.springframework.test.web.servlet.result.MockMvcResultHandlers
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.content
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
+import kotlin.Exception as Exception1
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -42,9 +44,11 @@ class AuthenticationControllerTests {
 
     @Test
     fun `should return error message`() {
-        `when`(authenticationService.signInWithUsernameAndPassword("abc", "456"))
-                .thenReturn("wrong password").thenThrow(IllegalStateException::class.java)
-
+        //mock database data
+//        `when`(authenticationService.signInWithUsernameAndPassword("abc", "456"))
+//                .thenReturn("wrong password")
+        `when`(authenticationService.signInWithUsernameAndPassword("abcd", "123"))
+                .thenReturn("qwert").thenThrow();
 
         mvc.perform(post("/api/v1/auth/login")
                 .contentType(MediaType.APPLICATION_JSON)
@@ -54,6 +58,7 @@ class AuthenticationControllerTests {
                         "password": "123"
                     }
                 """.trimIndent()))
+                .andDo(MockMvcResultHandlers.print())
                 .andExpect(status().isBadRequest)
                 .andExpect(content().string("wrong password"))
     }

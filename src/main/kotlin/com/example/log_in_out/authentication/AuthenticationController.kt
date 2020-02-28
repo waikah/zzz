@@ -13,7 +13,6 @@ import org.springframework.web.client.HttpClientErrorException
 import org.springframework.web.servlet.function.RequestPredicates.contentType
 import java.io.IOException
 
-
 @RestController
 @CrossOrigin(origins = ["http://localhost:4200"], allowedHeaders = ["*"])
 @RequestMapping("/api/v1/auth")
@@ -26,7 +25,8 @@ class AuthenticationController {
         val token: String
         return try {
             token = authenticationService.signInWithUsernameAndPassword(userDetail.username, userDetail.password)
-            ResponseEntity.ok().contentType(MediaType.APPLICATION_JSON).body(token)
+
+            ResponseEntity.ok().header("token", token).contentType(MediaType.APPLICATION_JSON).body(token)
         } catch (e: Exception) {
             ResponseEntity.badRequest().contentType(MediaType.APPLICATION_JSON).body(e.message.toString())
         }
@@ -38,6 +38,18 @@ class AuthenticationController {
         val signOutMsg: String
         return try {
             signOutMsg = authenticationService.signOutWithToken(tokenDetail.authenticationToken)
+
+            ResponseEntity.ok().contentType(MediaType.APPLICATION_JSON).body(signOutMsg)
+        } catch (e: Exception) {
+            ResponseEntity.badRequest().contentType(MediaType.APPLICATION_JSON).body(e.message.toString())
+        }
+    }
+
+    @PostMapping("/signUp")
+    fun signOut(@RequestBody userDetail: UserLoginPostRequest): ResponseEntity<String> {
+        val signOutMsg: String
+        return try {
+            signOutMsg = authenticationService.signUpWithUsernameAndPassword(userDetail.username, userDetail.password)
 
             ResponseEntity.ok().contentType(MediaType.APPLICATION_JSON).body(signOutMsg)
         } catch (e: Exception) {

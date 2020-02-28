@@ -6,9 +6,10 @@ import javax.persistence.*
 @Table(name = "user")
 data class User(
         @Id
-        @GeneratedValue(strategy = GenerationType.IDENTITY)
+        @GeneratedValue(strategy = GenerationType.SEQUENCE)
+//        @TableGenerator(name="tab", table="tab", schema="login_portal")
         @Column(name = "user_id", nullable = false, unique = true, updatable = false)
-        val id: Long,
+        val id: Int,
 
         @Column(name = "username", nullable = false, unique = true, updatable = false)
         val username: String,

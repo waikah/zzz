@@ -10,5 +10,5 @@ data class Token(
         var authenticationToken: String,
 
         @Column(name = "user_id", nullable = false, updatable = false)
-        var userId: Long
+        var userId: Int
 )
