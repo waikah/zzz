@@ -26,9 +26,6 @@ class AuthenticationServiceImpl : AuthenticationService {
 
         return userRepo.findByUsername(username)
                 .map {
-                    //                    val digest = MessageDigest.getInstance("SHA-256")
-//                    val hash = digest.digest(password.toByteArray(StandardCharsets.UTF_8))
-//                    val encoded = getEncoder().encodeToString(hash)
                     if (BCrypt.checkpw(password, it.password)) {
                         // Generate Token
                         //The JWT signature algorithm we will be using to sign the token
@@ -92,18 +89,12 @@ class AuthenticationServiceImpl : AuthenticationService {
     override fun signUpWithUsernameAndPassword(username: String, password: String): String {
 
         return if (userRepo.findByUsername(username).isEmpty) {
-            try {
-                val encryptedPassword: String = BCrypt.hashpw(password, BCrypt.gensalt())
+            val encryptedPassword: String = BCrypt.hashpw(password, BCrypt.gensalt())
 
-                val user = User(0, username, encryptedPassword)
-                userRepo.save(user)
-                "Sign up successful"
-            } catch (e: Exception) {
-                e.message.toString();
-            }
-        } else {
-            "Invalid username"
-        }
+            val user = User(0, username, encryptedPassword)
+            userRepo.save(user)
+            "Sign up successful"
+        } else throw Exception("Username already in use, please try again!")
 
     }
 
