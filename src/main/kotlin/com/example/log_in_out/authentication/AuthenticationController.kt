@@ -14,7 +14,7 @@ import org.springframework.web.servlet.function.RequestPredicates.contentType
 import java.io.IOException
 
 @RestController
-@CrossOrigin(origins = ["http://localhost:4200"], allowedHeaders = ["*"])
+@CrossOrigin(origins = ["http://localhost:4200"], allowedHeaders = ["*"], exposedHeaders = ["token"])
 @RequestMapping("/api/v1/auth")
 class AuthenticationController {
     @Autowired
