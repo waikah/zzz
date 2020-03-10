@@ -88,7 +88,7 @@ class AuthenticationServiceImpl : AuthenticationService {
 
     override fun signUpWithUsernameAndPassword(username: String, password: String): String {
 
-        return if (userRepo.findByUsername(username).isEmpty) {
+        return if (!userRepo.findByUsername(username).isPresent) {
             val encryptedPassword: String = BCrypt.hashpw(password, BCrypt.gensalt())
 
             val user = User(0, username, encryptedPassword)
