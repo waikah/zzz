@@ -35,7 +35,7 @@ class AuthenticationControllerTests {
                 .content("""
                     {
                         "username": "abc",
-                        "password": "123"
+                        "password": "1123"
                     }
                 """.trimIndent()))
                 .andExpect(status().isOk)

@@ -14,13 +14,14 @@ import org.springframework.web.servlet.function.RequestPredicates.contentType
 import java.io.IOException
 
 @RestController
-@CrossOrigin(origins = ["http://localhost:4200"], allowedHeaders = ["*"], exposedHeaders = ["token"])
+//@CrossOrigin(origins = ["http://localhost:4200"], allowedHeaders = ["*"], exposedHeaders = ["token"])
+//@CrossOrigin(origins = ["http://192.168.3.134:8080:"], allowedHeaders = ["*"], exposedHeaders = ["token"])
 @RequestMapping("/api/v1/auth")
 class AuthenticationController {
     @Autowired
     lateinit var authenticationService: AuthenticationService
 
-    @GetMapping("/login")
+    @PostMapping("/login")
     fun signIn(@RequestBody userDetail: UserLoginPostRequest): ResponseEntity<String> {
         val token: String
         return try {
@@ -33,7 +34,7 @@ class AuthenticationController {
         //return ResponseEntity.ok(token)
     }
 
-    @GetMapping("/logout")
+    @PostMapping("/logout")
     fun signOut(@RequestBody tokenDetail: TokenStoringPostRequest): ResponseEntity<String> {
         val signOutMsg: String
         return try {
@@ -45,7 +46,7 @@ class AuthenticationController {
         }
     }
 
-    @GetMapping("/signUp")
+    @PostMapping("/signUp")
     fun signOut(@RequestBody userDetail: UserLoginPostRequest): ResponseEntity<String> {
         val signOutMsg: String
         return try {
