@@ -14,7 +14,7 @@ import org.springframework.web.servlet.function.RequestPredicates.contentType
 import java.io.IOException
 
 @RestController
-@CrossOrigin(origins = ["http://localhost:4200"], allowedHeaders = ["*"], exposedHeaders = ["token"])
+@CrossOrigin(origins = ["*"], allowedHeaders = ["*"], exposedHeaders = ["token"])
 @RequestMapping("/api/v1/auth")
 class AuthenticationController {
     @Autowired
@@ -55,5 +55,10 @@ class AuthenticationController {
         } catch (e: Exception) {
             ResponseEntity.badRequest().contentType(MediaType.APPLICATION_JSON).body(e.message.toString())
         }
+    }
+
+    @GetMapping("/test")
+    fun hello(): ResponseEntity<String> {
+        return ResponseEntity.ok().body("Welcome")
     }
 }
