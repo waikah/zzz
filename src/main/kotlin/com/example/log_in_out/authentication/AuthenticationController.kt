@@ -20,7 +20,7 @@ class AuthenticationController {
     @Autowired
     lateinit var authenticationService: AuthenticationService
 
-    @PostMapping("/login")
+    @GetMapping("/login")
     fun signIn(@RequestBody userDetail: UserLoginPostRequest): ResponseEntity<String> {
         val token: String
         return try {
@@ -33,7 +33,7 @@ class AuthenticationController {
         //return ResponseEntity.ok(token)
     }
 
-    @PostMapping("/logout")
+    @GetMapping("/logout")
     fun signOut(@RequestBody tokenDetail: TokenStoringPostRequest): ResponseEntity<String> {
         val signOutMsg: String
         return try {
@@ -45,7 +45,7 @@ class AuthenticationController {
         }
     }
 
-    @PostMapping("/signUp")
+    @GetMapping("/signUp")
     fun signOut(@RequestBody userDetail: UserLoginPostRequest): ResponseEntity<String> {
         val signOutMsg: String
         return try {
