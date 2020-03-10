@@ -3,7 +3,7 @@ package com.example.log_in_out.authentication.dao.database.user
 import javax.persistence.*
 
 @Entity
-@Table(name = "user")
+@Table(name = "userss")
 data class User(
         @Id
         @GeneratedValue(strategy = GenerationType.SEQUENCE)
