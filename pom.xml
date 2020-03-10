@@ -30,8 +30,8 @@
     <properties>
         <java.version>1.8</java.version>
         <kotlin.version>1.3.61</kotlin.version>
+<!--        <start-class>com.example.log_in_out.LoginAPIApplication</start-class>-->
     </properties>
-
 
     <dependencies>
         <!--        Spring Plugins Repository-->
@@ -82,16 +82,16 @@
             <!--                </exclusion>-->
             <!--            </exclusions>-->
         </dependency>
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-gcp-starter</artifactId>
-            <version>1.2.2.RELEASE</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-gcp-starter-sql-mysql</artifactId>
-            <version>1.2.2.RELEASE</version>
-        </dependency>
+        <!--        <dependency>-->
+        <!--            <groupId>org.springframework.cloud</groupId>-->
+        <!--            <artifactId>spring-cloud-gcp-starter</artifactId>-->
+        <!--            <version>1.2.2.RELEASE</version>-->
+        <!--        </dependency>-->
+        <!--        <dependency>-->
+        <!--            <groupId>org.springframework.cloud</groupId>-->
+        <!--            <artifactId>spring-cloud-gcp-starter-sql-mysql</artifactId>-->
+        <!--            <version>1.2.2.RELEASE</version>-->
+        <!--        </dependency>-->
         <dependency>
             <groupId>com.fasterxml.jackson.module</groupId>
             <artifactId>jackson-module-kotlin</artifactId>
@@ -100,10 +100,10 @@
             <groupId>org.jetbrains.kotlin</groupId>
             <artifactId>kotlin-reflect</artifactId>
         </dependency>
-        <!--        <dependency>-->
-        <!--            <groupId>org.jetbrains.kotlin</groupId>-->
-        <!--            <artifactId>kotlin-stdlib-jdk8</artifactId>-->
-        <!--        </dependency>-->
+        <dependency>
+            <groupId>org.jetbrains.kotlin</groupId>
+            <artifactId>kotlin-stdlib-jdk8</artifactId>
+        </dependency>
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
@@ -118,35 +118,38 @@
         <!--        Central Repository-->
     </dependencies>
     <build>
-        <!--        <sourceDirectory>${project.basedir}/src/main/kotlin</sourceDirectory>-->
-        <!--        <testSourceDirectory>${project.basedir}/src/test/kotlin</testSourceDirectory>-->
+        <sourceDirectory>${project.basedir}/src/main/kotlin</sourceDirectory>
+        <testSourceDirectory>${project.basedir}/src/test/kotlin</testSourceDirectory>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <mainClass>com.example.log_in_out.LoginAPIApplication</mainClass>
+                </configuration>
             </plugin>
-            <!--            <plugin>-->
-            <!--                <groupId>org.jetbrains.kotlin</groupId>-->
-            <!--                <artifactId>kotlin-maven-plugin</artifactId>-->
-            <!--                <configuration>-->
-            <!--                    <compilerPlugins>-->
-            <!--                        <plugin>jpa</plugin>-->
-            <!--                    </compilerPlugins>-->
-            <!--                    <jvmTarget>1.8</jvmTarget>-->
-            <!--                </configuration>-->
-            <!--                <dependencies>-->
-            <!--                    <dependency>-->
-            <!--                        <groupId>org.jetbrains.kotlin</groupId>-->
-            <!--                        <artifactId>kotlin-maven-allopen</artifactId>-->
-            <!--                        <version>${kotlin.version}</version>-->
-            <!--                    </dependency>-->
-            <!--                    <dependency>-->
-            <!--                        <groupId>org.jetbrains.kotlin</groupId>-->
-            <!--                        <artifactId>kotlin-maven-noarg</artifactId>-->
-            <!--                        <version>${kotlin.version}</version>-->
-            <!--                    </dependency>-->
-            <!--                </dependencies>-->
-            <!--            </plugin>-->
+            <plugin>
+                <groupId>org.jetbrains.kotlin</groupId>
+                <artifactId>kotlin-maven-plugin</artifactId>
+                <configuration>
+                    <compilerPlugins>
+                        <plugin>jpa</plugin>
+                    </compilerPlugins>
+                    <jvmTarget>1.8</jvmTarget>
+                </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.jetbrains.kotlin</groupId>
+                        <artifactId>kotlin-maven-allopen</artifactId>
+                        <version>${kotlin.version}</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>org.jetbrains.kotlin</groupId>
+                        <artifactId>kotlin-maven-noarg</artifactId>
+                        <version>${kotlin.version}</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
             <plugin>
                 <groupId>com.google.cloud.tools</groupId>
                 <artifactId>appengine-maven-plugin</artifactId>
