@@ -7,7 +7,7 @@ import org.springframework.boot.runApplication
 import org.springframework.web.bind.annotation.RestController
 
 @SpringBootApplication
-open class LoginAPIApplication
+class LoginAPIApplication
 
 fun main(args: Array<String>) {
 	runApplication<LoginAPIApplication>(*args)
