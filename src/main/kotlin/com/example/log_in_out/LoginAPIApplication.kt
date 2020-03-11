@@ -7,15 +7,15 @@ import org.springframework.boot.web.servlet.support.SpringBootServletInitializer
 
 
 @SpringBootApplication
-open class LoginAPIApplication : SpringBootServletInitializer() {
+open class LoginAPIApplication {
 
-	override fun configure(application: SpringApplicationBuilder): SpringApplicationBuilder? {
-		return application.sources(LoginAPIApplication::class.java)
-	}
-//	companion object {
-//		@JvmStatic
-//		fun main(args: Array<String>) {
-//			SpringApplication.run(LoginAPIApplication::class.java, *args)
-//		}
+	//	override fun configure(application: SpringApplicationBuilder): SpringApplicationBuilder? {
+//		return application.sources(LoginAPIApplication::class.java)
 //	}
+	companion object {
+		@JvmStatic
+		fun main(args: Array<String>) {
+			SpringApplication.run(LoginAPIApplication::class.java, *args)
+		}
+	}
 }
