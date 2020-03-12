@@ -9,13 +9,13 @@ import org.springframework.boot.web.servlet.support.SpringBootServletInitializer
 
 @SpringBootApplication
 open class LoginAPIApplication : SpringBootServletInitializer() {
-    //	companion object {
-//		@JvmStatic
-//		fun main(args: Array<String>) {
-//			SpringApplication.run(LoginAPIApplication::class.java, *args)
-//		}
-//	}
-    fun main(args: Array<String>) {
-        runApplication<LoginAPIApplication>(*args)
-    }
+	companion object {
+		@JvmStatic
+		fun main(args: Array<String>) {
+			SpringApplication.run(LoginAPIApplication::class.java, *args)
+		}
+	}
+//    fun main(args: Array<String>) {
+//        runApplication<LoginAPIApplication>(*args)
+//    }
 }
