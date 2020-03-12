@@ -3,4 +3,9 @@
     <version>2</version>
     <threadsafe>true</threadsafe>
     <runtime>java8</runtime>
+    <instance-class>B4</instance-class>
+    <basic-scaling>
+        <idle-timeout>60m</idle-timeout>
+        <max-instances>5</max-instances>
+    </basic-scaling>
 </appengine-web-app>
