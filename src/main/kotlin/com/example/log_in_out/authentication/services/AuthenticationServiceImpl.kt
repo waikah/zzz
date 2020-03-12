@@ -7,10 +7,6 @@ import com.example.log_in_out.authentication.dao.database.user.UserRepository
 import org.mindrot.jbcrypt.BCrypt
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
-import java.awt.SystemColor.text
-import java.nio.charset.StandardCharsets
-import java.security.MessageDigest
-import java.util.Base64.getEncoder
 import java.util.*
 
 

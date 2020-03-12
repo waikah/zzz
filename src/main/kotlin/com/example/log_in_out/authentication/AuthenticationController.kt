@@ -4,14 +4,9 @@ import com.example.log_in_out.authentication.dao.TokenStoringPostRequest
 import com.example.log_in_out.authentication.dao.UserLoginPostRequest
 import com.example.log_in_out.authentication.services.AuthenticationService
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.http.HttpHeaders
-import org.springframework.http.HttpStatus
 import org.springframework.http.MediaType
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
-import org.springframework.web.client.HttpClientErrorException
-import org.springframework.web.servlet.function.RequestPredicates.contentType
-import java.io.IOException
 
 @RestController
 @CrossOrigin(origins = ["*"], allowedHeaders = ["*"], exposedHeaders = ["token"])
@@ -30,7 +25,6 @@ class AuthenticationController {
         } catch (e: Exception) {
             ResponseEntity.badRequest().contentType(MediaType.APPLICATION_JSON).body(e.message.toString())
         }
-        //return ResponseEntity.ok(token)
     }
 
     @PostMapping("/logout")

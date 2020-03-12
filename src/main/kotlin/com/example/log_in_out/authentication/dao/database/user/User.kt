@@ -7,7 +7,6 @@ import javax.persistence.*
 data class User(
         @Id
         @GeneratedValue(strategy = GenerationType.SEQUENCE)
-//        @TableGenerator(name="tab", table="tab", schema="login_portal")
         @Column(name = "user_id", nullable = false, unique = true, updatable = false)
         val id: Int,
 
