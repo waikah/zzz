@@ -61,10 +61,10 @@ class AuthenticationServiceImpl : AuthenticationService {
                         tokenRepo.save(token)
                         return@map uuid.toString()
                     } else {
-                        throw Exception("Wrong password")
+                        throw Exception("ERROR: Wrong password, please try again.")
                     }
                 }.orElseThrow {
-                    return@orElseThrow Exception("Wrong Username")
+                    return@orElseThrow Exception("ERROR: Username doesn't exist.")
                 }
     }
 
@@ -78,7 +78,7 @@ class AuthenticationServiceImpl : AuthenticationService {
                     return@map "Logout Successfully"
                 }
                 .orElseThrow {
-                    return@orElseThrow Exception("Invalid Token")
+                    return@orElseThrow Exception("ERROR: Invalid Token.")
                 }
     }
 
@@ -90,7 +90,7 @@ class AuthenticationServiceImpl : AuthenticationService {
             val user = User(0, username, encryptedPassword)
             userRepo.save(user)
             "Sign up successful"
-        } else throw Exception("Username already in use, please try again!")
+        } else throw Exception("ERROR: Username already in use, please try again.")
 
     }
 
